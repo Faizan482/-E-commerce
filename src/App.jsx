@@ -6,11 +6,12 @@ import Order from './pages/order/Order'
 import Cart from './pages/cart/Cart'
 import Dashboard from './pages/admin/dashboard/Dashboard'
 import Nopage from './pages/noPage/Nopage'
-import MyState from './context/data/myState'
+import MyState from './context/data/MyState'
 import Login from './pages/registration/Login'
 import Signup from './pages/registration/Signup'
 import Productinfo from './pages/productInfo/Productinfo'
-
+import AddProduct from './pages/admin/pages/AddProduct'
+import UpdateProduct from './pages/admin/pages/UpdateProduct'
 function App() {
 
   return (
@@ -25,6 +26,8 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/productinfo/:id' element={<Productinfo />} />
+            <Route path='/addproduct' element={<AddProduct />} />
+            <Route path='/updateproduct' element={<UpdateProduct />} />
             <Route path='/*' element={<Nopage />} />
           </Routes>
         </Router>

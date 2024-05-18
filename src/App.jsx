@@ -22,14 +22,30 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/order' element={<Order />} />
+            <Route path='/order' element={
+              <ProtectedRoute>
+                <Order />
+              </ProtectedRoute>
+            } />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/dashboard' element={
+              <ProtectedRouteForAdmin>
+                <Dashboard />
+              </ProtectedRouteForAdmin>
+            } />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/productinfo/:id' element={<Productinfo />} />
-            <Route path='/addproduct' element={<AddProduct />} />
-            <Route path='/updateproduct' element={<UpdateProduct />} />
+            <Route path='/addproduct' element={
+              <ProtectedRouteForAdmin>
+                <AddProduct />
+              </ProtectedRouteForAdmin>
+            } />
+            <Route path='/updateproduct' element={
+              <ProtectedRouteForAdmin>
+                <UpdateProduct />
+              </ProtectedRouteForAdmin>
+            } />
             <Route path='/*' element={<Nopage />} />
           </Routes>
           <ToastContainer />
@@ -52,9 +68,14 @@ export const ProtectedRoute = ({ children }) => {
 
 // protected Routes for admin
 
-// export const ProtectedRouteForAdmin = ({ children }) => {
-//   cons
-// }
+export const ProtectedRouteForAdmin = ({ children }) => {
+  const admin = JSON.parse(localStorage.getItem("user"))
+  if (admin.user.email === 'demo@gmail.com') {
+    return children
+  } else {
+    return <Navigate to={'/login'} />
+  }
+}
 
 
 export default App

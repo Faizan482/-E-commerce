@@ -15,10 +15,11 @@ const Signup = () => {
 
     // for authentication 
     const signUp = async () => {
-        setLoading(true)
         if (name === "" || email === "" || password === "") {
             toast.error("All fields are required")
+            return
         }
+        setLoading(true)
         try {
             const users = await createUserWithEmailAndPassword(auth, email, password);
             console.log(users)
@@ -40,6 +41,8 @@ const Signup = () => {
             setLoading(false)
         } catch (error) {
             console.log(error);
+            toast.error("SignUp failed. Please check your credentials and try again.");
+
             setLoading(false)
 
 

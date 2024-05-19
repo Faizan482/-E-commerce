@@ -29,6 +29,7 @@ function App() {
             } />
             <Route path='/cart' element={<Cart />} />
             <Route path='/dashboard' element={
+              // for admin 
               <ProtectedRouteForAdmin>
                 <Dashboard />
               </ProtectedRouteForAdmin>

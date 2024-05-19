@@ -9,6 +9,7 @@ import Loader from "../../components/loader/Loader";
 function Login() {
     const context = useContext(myContext)
     const { loading, setLoading } = context
+    console.log(loading, "loading")
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -22,19 +23,20 @@ function Login() {
 
     const navigate = useNavigate()
     const login = async (e) => {
-        setLoading(true)
         e.preventDefault();
         if (formData === '') {
             toast.error("All field are required")
+            return
         }
+        setLoading(true)
         try {
             const result = await signInWithEmailAndPassword(auth, formData.email, formData.password)
             toast.success("Login successfull")
             localStorage.setItem('user', JSON.stringify(result))
             navigate('/')
-            setLoading(false)
         } catch (error) {
             console.log(error)
+            toast.error("Login failed. Please check your credentials and try again.");
             setLoading(false)
         }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import MyContext from "./myContext"
-import { Timestamp, addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore"
+import { Timestamp, addDoc, collection, doc, onSnapshot, orderBy, query, setDoc } from "firebase/firestore"
 import { toast } from "react-toastify"
 import { fireDb } from '../../firebase/FirebaseConfig'
 const MyState = (props) => {
@@ -83,6 +83,22 @@ const MyState = (props) => {
     useEffect(() => {
         getProductData()
     }, [])
+
+
+    // updateProduct function 
+    const editHandle = (item) => {
+        setProducts(item)
+    }
+
+    const updateProduct = async () => {
+        try {
+            await setDoc(doc(fireDb, "products", products.id), products)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 
     return (
         <MyContext.Provider value={{ mode, toggleMode, loading, setLoading, products, setProducts, addProduct, product }}>{props.children}</MyContext.Provider>

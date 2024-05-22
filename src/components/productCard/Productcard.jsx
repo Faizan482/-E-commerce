@@ -13,6 +13,7 @@ function ProductCard() {
         dispatch(addToCart(product))
         toast.success("Add to cart Item Successfully")
     }
+    // setcart Item in localStorage 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItems))
     }, [cartItems])
